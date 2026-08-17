@@ -1,66 +1,99 @@
-/* ==============================
-   THEME
-============================== */
+/* =========================================
+   RESET
+========================================= */
 
-:root {
-    --color-bg: #160f17;
-    --color-bg-secondary: #21151f;
-
-    --color-surface: #2b1a28;
-    --color-surface-soft: #36202f;
-
-    --color-primary: #f44791;
-    --color-primary-light: #ff78ad;
-    --color-primary-dark: #d52d73;
-
-    --color-accent: #f6b38d;
-    --color-cream: #fff2e8;
-
-    --color-text: #fffaf7;
-    --color-text-soft: #d9c7cf;
-    --color-text-muted: #a58d99;
-
-    --color-border: rgba(255, 255, 255, 0.10);
-
-    --font-heading: "DM Serif Display", serif;
-    --font-body: "Poppins", sans-serif;
-
-    --container-width: 1200px;
-
-    --radius-small: 12px;
-    --radius-medium: 20px;
-    --radius-large: 28px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-
-/* ==============================
-   GLOBAL
-============================== */
 
 html {
     scroll-behavior: smooth;
 }
 
 body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+
+/* =========================================
+   THEME
+========================================= */
+
+:root {
+    /* Backgrounds */
+    --color-bg: #160f17;
+    --color-bg-secondary: #21151f;
+    --color-bg-footer: #100a10;
+    --color-surface: #2b1a28;
+
+    /* Brand */
+    --color-primary: #f44791;
+    --color-primary-light: #ff78ad;
+    --color-primary-dark: #d52d73;
+
+    /* Accents */
+    --color-accent: #f6b38d;
+    --color-cream: #fff1e7;
+
+    /* Text */
+    --color-text: #fffaf7;
+    --color-text-soft: #dacbd2;
+    --color-text-muted: #9f8793;
+
+    /* Border */
+    --color-border: rgba(255, 255, 255, 0.1);
+
+    /* Fonts */
+    --font-heading: "DM Serif Display", serif;
+    --font-body: "Poppins", sans-serif;
+
+    /* Layout */
+    --container-width: 1200px;
+
+    /* Radius */
+    --radius-small: 12px;
+    --radius-medium: 20px;
+    --radius-large: 28px;
+}
+
+
+/* =========================================
+   GLOBAL
+========================================= */
+
+body {
     background:
         radial-gradient(circle at top,
-            #2a1827 0%,
-            var(--color-bg) 45%);
+            #2b1828 0%,
+            var(--color-bg) 42%);
 
     color: var(--color-text);
 
     font-family: var(--font-body);
 
     line-height: 1.6;
-
-    overflow-x: hidden;
 }
 
-img {
-    max-width: 100%;
+::selection {
+    background-color: var(--color-primary);
+    color: #ffffff;
 }
 
 .container {
+    width: 100%;
     max-width: var(--container-width);
 
     margin: 0 auto;
@@ -69,9 +102,9 @@ img {
 }
 
 
-/* ==============================
+/* =========================================
    NAVIGATION
-============================== */
+========================================= */
 
 .site-nav {
     position: fixed;
@@ -89,11 +122,12 @@ img {
 }
 
 .site-nav__container {
+    width: 100%;
     max-width: var(--container-width);
 
     margin: 0 auto;
 
-    padding: 18px 32px;
+    padding: 16px 32px;
 }
 
 .site-nav__brand {
@@ -101,14 +135,11 @@ img {
 }
 
 .site-nav__brand img {
-    display: block;
-
     width: 135px;
-
     height: auto;
 
     filter:
-        drop-shadow(0 5px 16px rgba(244, 71, 145, 0.25));
+        drop-shadow(0 7px 18px rgba(244, 71, 145, 0.28));
 }
 
 .site-nav--hidden {
@@ -116,9 +147,9 @@ img {
 }
 
 
-/* ==============================
+/* =========================================
    HERO
-============================== */
+========================================= */
 
 .hero {
     position: relative;
@@ -126,6 +157,7 @@ img {
     width: 100%;
 
     height: 100vh;
+    height: 100dvh;
 
     overflow: hidden;
 }
@@ -136,13 +168,12 @@ img {
     width: 100%;
 
     height: 100vh;
+    height: 100dvh;
 
     display: flex;
-
     flex-direction: column;
 
     justify-content: center;
-
     align-items: center;
 
     overflow: hidden;
@@ -151,7 +182,9 @@ img {
 }
 
 
-/* VIDEO */
+/* =========================================
+   HERO VIDEO
+========================================= */
 
 .hero__video {
     position: absolute;
@@ -159,38 +192,43 @@ img {
     inset: 0;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
+    object-position: center;
 
     z-index: 1;
 
     opacity: 0;
 
     filter:
-        brightness(0.85) saturate(1.05);
+        brightness(0.88) saturate(1.05);
 
     will-change: opacity;
 }
 
 
-/* MAIN CONTENT */
+/* =========================================
+   HERO ARTWORK
+========================================= */
 
 .hero__content {
-    width: 100%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
     position: relative;
 
     z-index: 3;
 
-    padding: 20px 0;
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 18px 0;
 
     will-change:
         opacity,
@@ -200,24 +238,25 @@ img {
 .hero__artwork {
     width: min(900px, 90vw);
 
-    border-radius: var(--radius-medium);
-
     overflow: hidden;
 
+    border-radius: var(--radius-medium);
+
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.32);
+        0 30px 90px rgba(0, 0, 0, 0.32);
 }
 
 .hero__artwork img {
-    display: block;
-
     width: 100%;
-
     height: auto;
+
+    object-fit: contain;
 }
 
 
-/* INFO BAR */
+/* =========================================
+   HERO INFO BAR
+========================================= */
 
 .hero__info {
     position: relative;
@@ -226,14 +265,13 @@ img {
 
     width: 100%;
 
-    margin-top: 6px;
-
     padding: 22px 0;
 
     background:
-        rgba(28, 17, 27, 0.93);
+        rgba(29, 17, 27, 0.93);
 
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
     border-top:
         1px solid var(--color-border);
@@ -265,6 +303,11 @@ img {
     text-align: right;
 }
 
+
+/* =========================================
+   SMALL LABELS
+========================================= */
+
 .eyebrow,
 .section__eyebrow {
     margin-bottom: 8px;
@@ -272,7 +315,6 @@ img {
     color: var(--color-primary);
 
     font-size: 12px;
-
     font-weight: 700;
 
     letter-spacing: 2.5px;
@@ -280,47 +322,51 @@ img {
     text-transform: uppercase;
 }
 
+
+/* =========================================
+   HERO TEXT
+========================================= */
+
 .hero__headline {
+    color: var(--color-cream);
+
     font-family: var(--font-heading);
 
-    font-size: clamp(22px,
+    font-size:
+        clamp(22px,
             2vw,
             29px);
 
-    line-height: 1.15;
+    font-weight: 400;
 
-    color: var(--color-cream);
+    line-height: 1.15;
 }
 
 .hero__meta {
     color: var(--color-text-soft);
 
     font-size: 13px;
-
     font-weight: 600;
 
     line-height: 1.5;
 }
 
 
-/* HERO ARROW */
+/* =========================================
+   HERO ARROW
+========================================= */
 
 .hero__arrow {
     position: absolute;
 
-    bottom: 14px;
-
+    bottom: 12px;
     left: 50%;
 
     z-index: 5;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     opacity: 0.65;
-
-    animation:
-        bounce 2s infinite;
 
     will-change:
         opacity,
@@ -328,53 +374,50 @@ img {
 }
 
 .hero__arrow img {
-    display: block;
+    animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
 
     0%,
     100% {
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 
     50% {
-        transform:
-            translateY(-8px);
+        transform: translateY(-8px);
     }
 }
 
 
-/* ==============================
+/* =========================================
    BUTTONS
-============================== */
+========================================= */
 
 .button {
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     min-height: 52px;
 
-    padding:
-        14px 32px;
+    padding: 14px 32px;
+
+    border: none;
 
     border-radius: 999px;
-
-    border: 0;
 
     text-decoration: none;
 
     font-family: var(--font-body);
 
     font-size: 14px;
-
     font-weight: 600;
 
     letter-spacing: 0.3px;
+
+    cursor: pointer;
 
     transition:
         transform 0.25s ease,
@@ -383,7 +426,7 @@ img {
 }
 
 .button--primary {
-    color: #fff;
+    color: #ffffff;
 
     background:
         linear-gradient(135deg,
@@ -391,34 +434,38 @@ img {
             var(--color-primary-light));
 
     box-shadow:
-        0 10px 30px rgba(244, 71, 145, 0.22);
+        0 10px 30px rgba(244, 71, 145, 0.23);
 }
 
 .button--primary:hover {
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
-        0 14px 38px rgba(244, 71, 145, 0.38);
+        0 15px 38px rgba(244, 71, 145, 0.4);
 }
 
 
-/* ==============================
-   SECTIONS
-============================== */
+/* =========================================
+   MAIN
+========================================= */
 
-.section {
+main {
     position: relative;
 
     z-index: 2;
 }
 
+.section {
+    position: relative;
+}
 
-/* STORY */
+
+/* =========================================
+   STORY
+========================================= */
 
 .section--story {
-    padding:
-        130px 0;
+    padding: 130px 0;
 
     text-align: center;
 
@@ -435,6 +482,8 @@ img {
 .section__title {
     margin-bottom: 32px;
 
+    color: var(--color-accent);
+
     font-family: var(--font-heading);
 
     font-size:
@@ -445,8 +494,6 @@ img {
     font-weight: 400;
 
     line-height: 1.08;
-
-    color: var(--color-accent);
 }
 
 .section__text {
@@ -464,13 +511,12 @@ img {
 }
 
 
-/* ==============================
-   FEATURE
-============================== */
+/* =========================================
+   FEATURE SECTION
+========================================= */
 
 .section--feature {
-    padding:
-        110px 0;
+    padding: 110px 0;
 
     background:
         var(--color-bg-secondary);
@@ -479,28 +525,28 @@ img {
 .feature-card {
     position: relative;
 
+    width: 100%;
+
     min-height: 620px;
 
-    width: 100%;
+    overflow: hidden;
 
     border-radius:
         var(--radius-large);
 
-    overflow: hidden;
-
     display: flex;
 
     align-items: center;
-
     justify-content: flex-end;
 
     padding: 60px;
 
     background:
         linear-gradient(90deg,
-            rgba(22, 15, 23, 0.05) 35%,
-            rgba(22, 15, 23, 0.35) 65%,
-            rgba(22, 15, 23, 0.70) 100%),
+            rgba(22, 15, 23, 0.02) 25%,
+            rgba(22, 15, 23, 0.08) 48%,
+            rgba(22, 15, 23, 0.55) 75%,
+            rgba(22, 15, 23, 0.78) 100%),
         url("../assets/cakecraft-image2.png") center / cover no-repeat;
 
     box-shadow:
@@ -508,15 +554,17 @@ img {
 }
 
 .feature-card__content {
-    max-width: 430px;
+    width: 100%;
 
-    text-align: right;
+    max-width: 430px;
 
     display: flex;
 
     flex-direction: column;
 
     align-items: flex-end;
+
+    text-align: right;
 }
 
 .feature-card__title {
@@ -524,7 +572,8 @@ img {
 
     color: var(--color-cream);
 
-    font-family: var(--font-heading);
+    font-family:
+        var(--font-heading);
 
     font-size:
         clamp(42px,
@@ -547,16 +596,16 @@ img {
 }
 
 
-/* ==============================
+/* =========================================
    FOOTER
-============================== */
+========================================= */
 
 .site-footer {
     padding:
         85px 0 45px;
 
     background:
-        #120c13;
+        var(--color-bg-footer);
 
     border-top:
         1px solid var(--color-border);
@@ -574,26 +623,31 @@ img {
     gap: 26px;
 }
 
+.site-footer__brand {
+    display: inline-block;
+}
+
 .site-footer__brand img {
-    display: block;
-
     width: 220px;
-
     height: auto;
 
     filter:
         drop-shadow(0 8px 20px rgba(244, 71, 145, 0.18));
 }
 
+
+/* =========================================
+   FOOTER LINKS
+========================================= */
+
 .site-footer__links {
     display: flex;
 
-    justify-content: center;
-
     flex-wrap: wrap;
 
-    gap:
-        12px 28px;
+    justify-content: center;
+
+    gap: 12px 28px;
 }
 
 .site-footer__links a {
@@ -614,7 +668,9 @@ img {
 }
 
 
-/* SOCIAL */
+/* =========================================
+   SOCIAL LINKS
+========================================= */
 
 .site-footer__social {
     display: flex;
@@ -624,22 +680,20 @@ img {
 
 .social-link {
     width: 44px;
-
     height: 44px;
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
+    align-items: center;
 
     border-radius: 50%;
 
-    background:
-        var(--color-surface);
-
     border:
         1px solid var(--color-border);
+
+    background:
+        var(--color-surface);
 
     color:
         var(--color-text-soft);
@@ -647,7 +701,6 @@ img {
     text-decoration: none;
 
     font-size: 12px;
-
     font-weight: 700;
 
     transition:
@@ -657,7 +710,7 @@ img {
 }
 
 .social-link:hover {
-    color: #fff;
+    color: #ffffff;
 
     background:
         var(--color-primary);
@@ -667,7 +720,9 @@ img {
 }
 
 
-/* FOOTER TEXT */
+/* =========================================
+   FOOTER TEXT
+========================================= */
 
 .site-footer__note,
 .site-footer__copyright {
@@ -684,9 +739,9 @@ img {
 }
 
 
-/* ==============================
+/* =========================================
    REVEAL ANIMATION
-============================== */
+========================================= */
 
 .reveal {
     opacity: 0;
@@ -707,20 +762,11 @@ img {
 }
 
 
-/* ==============================
-   RESPONSIVE
-============================== */
+/* =========================================
+   TABLET / MOBILE
+========================================= */
 
 @media (max-width: 800px) {
-
-    .site-nav__container {
-        padding:
-            14px 20px;
-    }
-
-    .site-nav__brand img {
-        width: 105px;
-    }
 
     .container {
         padding:
@@ -728,35 +774,164 @@ img {
     }
 
 
+    /* NAV */
+
+    .site-nav__container {
+        padding:
+            12px 20px;
+    }
+
+    .site-nav__brand img {
+        width:
+            100px;
+    }
+
+
     /* HERO */
 
     .hero__panel {
-        padding-top: 70px;
+        padding-top:
+            55px;
+
+        justify-content:
+            center;
+    }
+
+    .hero__content {
+        flex: 1;
+
+        padding:
+            8px 0;
+
+        min-height:
+            0;
     }
 
     .hero__artwork {
-        width: 92%;
+        width:
+            92%;
+
+        max-width:
+            620px;
+
+        border-radius:
+            16px;
+
+        box-shadow:
+            none;
     }
 
+    .hero__artwork img {
+        width:
+            100%;
+
+        height:
+            auto;
+
+        max-height:
+            42dvh;
+
+        object-fit:
+            contain;
+    }
+
+
+    /* VIDEO */
+
+    .hero__video {
+        object-fit:
+            cover;
+
+        object-position:
+            center;
+    }
+
+
+    /* INFO BAR */
+
     .hero__info {
+        margin-top:
+            0;
+
         padding:
-            20px 0 26px;
+            16px 20px 20px;
     }
 
     .hero__info-container {
-        grid-template-columns: 1fr;
+        width:
+            100%;
 
-        text-align: center;
+        display:
+            flex;
 
-        gap: 18px;
+        flex-direction:
+            column;
+
+        justify-content:
+            center;
+
+        align-items:
+            center;
+
+        gap:
+            13px;
+
+        text-align:
+            center;
     }
 
+    .hero__info-block,
     .hero__info-block--right {
-        text-align: center;
+        width:
+            100%;
+
+        text-align:
+            center;
+    }
+
+    .eyebrow {
+        margin-bottom:
+            3px;
+
+        font-size:
+            10px;
+
+        letter-spacing:
+            2px;
+    }
+
+    .hero__headline {
+        font-size:
+            20px;
+    }
+
+    .hero__meta {
+        font-size:
+            12px;
+    }
+
+    .hero__info .button {
+        width:
+            min(100%, 320px);
     }
 
     .hero__arrow {
-        display: none;
+        display:
+            none;
+    }
+
+
+    /* BUTTON */
+
+    .button {
+        min-height:
+            48px;
+
+        padding:
+            12px 24px;
+
+        font-size:
+            13px;
     }
 
 
@@ -764,11 +939,30 @@ img {
 
     .section--story {
         padding:
-            90px 0;
+            85px 0;
+    }
+
+    .section__title {
+        font-size:
+            clamp(38px,
+                10vw,
+                54px);
+
+        margin-bottom:
+            24px;
+    }
+
+    .section__text {
+        max-width:
+            620px;
     }
 
     .section__text p {
-        font-size: 16px;
+        font-size:
+            16px;
+
+        line-height:
+            1.8;
     }
 
 
@@ -776,31 +970,55 @@ img {
 
     .section--feature {
         padding:
-            70px 0;
+            65px 0;
     }
 
     .feature-card {
-        min-height: 620px;
+        min-height:
+            620px;
 
-        align-items: flex-end;
+        align-items:
+            flex-end;
+
+        justify-content:
+            flex-start;
 
         padding:
-            32px 24px;
+            32px 26px;
 
         background:
             linear-gradient(to top,
-                rgba(22, 15, 23, 0.90) 0%,
-                rgba(22, 15, 23, 0.35) 60%,
-                transparent 100%),
-            url("../assets/cakecraft-image2.png") 36% center / cover no-repeat;
+                rgba(22, 15, 23, 0.94) 0%,
+                rgba(22, 15, 23, 0.7) 28%,
+                rgba(22, 15, 23, 0.15) 65%,
+                rgba(22, 15, 23, 0.02) 100%),
+            url("../assets/cakecraft-image2.png") 38% center / cover no-repeat;
     }
 
     .feature-card__content {
-        max-width: 100%;
+        max-width:
+            100%;
 
-        text-align: left;
+        align-items:
+            flex-start;
 
-        align-items: flex-start;
+        text-align:
+            left;
+    }
+
+    .feature-card__title {
+        font-size:
+            clamp(40px,
+                11vw,
+                56px);
+    }
+
+    .feature-card__description {
+        max-width:
+            420px;
+
+        font-size:
+            15px;
     }
 
 
@@ -808,10 +1026,264 @@ img {
 
     .site-footer {
         padding:
-            65px 0 36px;
+            60px 0 32px;
     }
 
     .site-footer__brand img {
-        width: 180px;
+        width:
+            175px;
+    }
+
+    .site-footer__links {
+        gap:
+            12px 20px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        padding:
+            0 16px;
+    }
+
+
+    /* NAV */
+
+    .site-nav__container {
+        padding:
+            10px 16px;
+    }
+
+    .site-nav__brand img {
+        width:
+            85px;
+    }
+
+
+    /* HERO */
+
+    .hero__panel {
+        padding-top:
+            46px;
+    }
+
+    .hero__content {
+        padding:
+            4px 0;
+    }
+
+    .hero__artwork {
+        width:
+            95%;
+
+        border-radius:
+            12px;
+    }
+
+    .hero__artwork img {
+        max-height:
+            34dvh;
+    }
+
+
+    /* INFO */
+
+    .hero__info {
+        padding:
+            12px 15px 14px;
+    }
+
+    .hero__info-container {
+        gap:
+            9px;
+    }
+
+    .eyebrow {
+        font-size:
+            9px;
+
+        letter-spacing:
+            1.8px;
+    }
+
+    .hero__headline {
+        font-size:
+            17px;
+    }
+
+    .hero__meta {
+        font-size:
+            10px;
+    }
+
+    .hero__info .button {
+        width:
+            100%;
+
+        max-width:
+            280px;
+
+        min-height:
+            44px;
+
+        padding:
+            10px 20px;
+    }
+
+
+    /* STORY */
+
+    .section--story {
+        padding:
+            65px 0;
+    }
+
+    .section__eyebrow {
+        font-size:
+            10px;
+    }
+
+    .section__title {
+        font-size:
+            39px;
+
+        line-height:
+            1.08;
+    }
+
+    .section__text p {
+        font-size:
+            15px;
+
+        line-height:
+            1.75;
+    }
+
+
+    /* FEATURE */
+
+    .section--feature {
+        padding:
+            50px 0;
+    }
+
+    .feature-card {
+        min-height:
+            560px;
+
+        padding:
+            26px 20px;
+
+        border-radius:
+            20px;
+
+        background:
+            linear-gradient(to top,
+                rgba(22, 15, 23, 0.96) 0%,
+                rgba(22, 15, 23, 0.72) 32%,
+                rgba(22, 15, 23, 0.12) 67%),
+            url("../assets/cakecraft-image2.png") 34% center / cover no-repeat;
+    }
+
+    .feature-card__title {
+        font-size:
+            41px;
+    }
+
+    .feature-card__description {
+        font-size:
+            14px;
+
+        line-height:
+            1.7;
+    }
+
+
+    /* FOOTER */
+
+    .site-footer {
+        padding:
+            55px 0 30px;
+    }
+
+    .site-footer__brand img {
+        width:
+            160px;
+    }
+
+    .site-footer__links {
+        flex-direction:
+            column;
+
+        gap:
+            10px;
+    }
+
+    .site-footer__links a {
+        font-size:
+            13px;
+    }
+
+    .site-footer__note,
+    .site-footer__copyright {
+        font-size:
+            11px;
+    }
+}
+
+
+/* =========================================
+   VERY SMALL DEVICES
+========================================= */
+
+@media (max-width: 360px) {
+
+    .hero__artwork img {
+        max-height:
+            30dvh;
+    }
+
+    .hero__headline {
+        font-size:
+            16px;
+    }
+
+    .hero__info {
+        padding:
+            10px 12px 12px;
+    }
+
+    .hero__info-container {
+        gap:
+            7px;
+    }
+
+    .hero__info .button {
+        min-height:
+            42px;
+
+        font-size:
+            12px;
+    }
+
+    .section__title {
+        font-size:
+            34px;
+    }
+
+    .feature-card {
+        min-height:
+            520px;
+    }
+
+    .feature-card__title {
+        font-size:
+            36px;
     }
 }
