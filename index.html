@@ -4,73 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CakeCraft</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/style.css">
 </head>
 
 <body>
 
-    <nav class="menu" id="menu">
+    <!-- NAVIGATION -->
+    <nav class="site-nav" id="site-nav">
 
-        <div class="my-content">
-            <a href="#" class="menu-logo">
-                🍰
+        <div class="site-nav__container">
+
+            <a href="#" class="site-nav__brand">
+
+                <img src="src/assets/logo-cakecraft.png" alt="CakeCraft">
+
             </a>
+
         </div>
 
     </nav>
 
-    <header class="capa">
 
-        <div class="capa-painel">
+    <!-- HERO -->
+    <header class="hero" id="hero">
 
-            <video muted playsinline preload="auto" class="capa-video"
-                src="src/assets/video-roman-odintsov.mp4"></video>
+        <div class="hero__panel">
 
-            <div class="capa-conteudo">
+            <!-- VIDEO -->
+            <video class="hero__video" muted playsinline preload="auto">
+                <source src="src/assets/video-roman-odintsov.mp4" type="video/mp4">
+            </video>
 
-                <h1 class="capa-moldura">
 
-                    <img class="capa-imagem" src="src/assets/cakecraft-image1.png" alt="CakeCarft image">
+            <!-- MAIN ARTWORK -->
+            <div class="hero__content">
 
-                </h1>
+                <div class="hero__artwork">
+
+                    <img src="src/assets/cakecraft-image1.png" alt="CakeCraft creations">
+
+                </div>
 
             </div>
 
-            <div class="capa-barra">
 
-                <div class="capa-barra-conteudo">
+            <!-- INFORMATION BAR -->
+            <div class="hero__info">
 
-                    <div class="capa-lancamento">
+                <div class="hero__info-container">
 
-                        <p class="capa-rotulo">CUSTOM ORDERS</p>
+                    <div class="hero__info-block">
 
-                        <p class="capa-data">MADE FRESH, JUST FOR YOU.</p>
+                        <p class="eyebrow">
+                            CUSTOM ORDERS
+                        </p>
 
-                        <a class="botao-primario" href="https://wa.me/5531999999999">ORDER ON WHATSAPP</a>
+                        <p class="hero__headline">
+                            MADE FRESH, JUST FOR YOU.
+                        </p>
 
-                        <div class="capa-plataformas">
+                    </div>
 
-                            <p class="capa-rotulo">SERVING</p>
 
-                            <div class="lista-plataformas">
+                    <a class="button button--primary" href="https://wa.me/5531999999999" target="_blank"
+                        rel="noopener noreferrer">
+                        ORDER ON WHATSAPP
+                    </a>
 
-                                <span class="texto-plataforma">BELO HORIZONTE & SURROUNDING AREAS</span>
 
-                            </div>
+                    <div class="hero__info-block hero__info-block--right">
 
-                        </div>
+                        <p class="eyebrow">
+                            SERVING
+                        </p>
+
+                        <p class="hero__meta">
+                            BELO HORIZONTE & SURROUNDING AREAS
+                        </p>
 
                     </div>
 
                 </div>
 
-
             </div>
 
-            <div class="capa-seta">
 
-                <img src="src/assets/arrow-down.png" alt="arrow down" width="24" height="24">
+            <!-- ARROW -->
+            <div class="hero__arrow">
+
+                <img src="src/assets/arrow-down.png" alt="" width="24" height="24">
 
             </div>
 
@@ -81,17 +116,24 @@
 
     <main>
 
-        <section class="secao-historia">
+        <!-- STORY -->
+        <section class="section section--story">
 
-            <div class="conteudo-central aparecer">
+            <div class="container reveal">
 
-                <p class="rotulo">OUR STORY</p>
+                <p class="section__eyebrow">
+                    OUR STORY
+                </p>
 
-                <h2 class="historia-titulo">MADE WITH CARE. CRAFTED TO CELEBRATE.</h2>
+                <h2 class="section__title">
+                    Made with care.<br>
+                    Crafted to celebrate.
+                </h2>
 
-                <div class="historia-texto">
+                <div class="section__text">
 
-                    <p> At CakeCraft, every cake is made to be part of a special moment.
+                    <p>
+                        At CakeCraft, every cake is made to be part of a special moment.
                         From birthdays to simple celebrations, we create handmade cakes
                         with delicious flavors, beautiful details, and a little extra sweetness.
                     </p>
@@ -102,30 +144,35 @@
 
         </section>
 
-        <section class="secao-video">
 
-            <div class="conteudo-central aparecer">
+        <!-- FEATURE -->
+        <section class="section section--feature">
 
-                <article>
+            <div class="container reveal">
 
-                    <div class="card-video-container">
+                <article class="feature-card">
 
-                        <p class="rotulo">OUR CREATIONS</p>
+                    <div class="feature-card__content">
 
-                        <h2 class="card-video-titulo">YOUR MOMENT. YOUR CAKE.</h2>
+                        <p class="section__eyebrow">
+                            OUR CREATIONS
+                        </p>
 
-                        <p class="card-video-descricao">
+                        <h2 class="feature-card__title">
+                            Your moment.<br>
+                            Your cake.
+                        </h2>
+
+                        <p class="feature-card__description">
                             Custom cakes made for birthdays,
                             celebrations, and every moment
                             worth making a little sweeter.
                         </p>
 
-                        <a href="https://wa.me/5531999999999" class="botao botao-primario card-video-botao">
-                            <img src="assets/icone-play.png" alt="Reproduzir vídeo" />
-
+                        <a href="https://wa.me/5531999999999" target="_blank" rel="noopener noreferrer"
+                            class="button button--primary">
                             ORDER NOW
                         </a>
-
 
                     </div>
 
@@ -137,47 +184,81 @@
 
     </main>
 
-    <footer class="rodape">
 
-        <div class="conteudo-central rodape-conteudo">
+    <!-- FOOTER -->
+    <footer class="site-footer">
 
-            <div class="rodape-logo">
+        <div class="container site-footer__content">
+
+            <a href="#" class="site-footer__brand">
 
                 <img src="src/assets/logo-cakecraft.png" alt="CakeCraft">
 
-            </div>
+            </a>
 
-            <nav class="rodape-links">
 
-                <a href="#" target="_blank">Contact</a>
-                <a href="#" target="_blank">Instagram</a>
-                <a href="#" target="_blank">WhatsApp</a>
+            <nav class="site-footer__links">
 
-            </nav>
+                <a href="#hero">
+                    Home
+                </a>
 
-            <div class="rodape-redes">
-                <a href="#" aria-label="Instagram" target="_blank" class="rede-social">Instagram</a>
+                <a href="#">
+                    Contact
+                </a>
 
-                <a href="#" aria-label="TikTok" target="_blank" class="rede-social">TikTok</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">
+                    Instagram
+                </a>
 
                 <a href="https://wa.me/5531999999999" target="_blank" rel="noopener noreferrer">
                     WhatsApp
                 </a>
 
+            </nav>
+
+
+            <div class="site-footer__social">
+
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer" class="social-link">
+                    IG
+                </a>
+
+                <a href="#" aria-label="TikTok" target="_blank" rel="noopener noreferrer" class="social-link">
+                    TT
+                </a>
+
+                <a href="https://wa.me/5531999999999" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    WA
+                </a>
+
             </div>
 
-            <p class="rodape-classificacao">
+
+            <p class="site-footer__note">
                 Custom orders are subject to availability.
                 Please contact us in advance for special requests.
             </p>
 
-            <p class="rodape-direitos">
+            <p class="site-footer__copyright">
                 &copy; 2026 CakeCraft. All rights reserved.
             </p>
 
         </div>
 
     </footer>
+
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+    </script>
+
+    <!-- JavaScript -->
+    <script src="src/js/script.js"></script>
 
 </body>
 
