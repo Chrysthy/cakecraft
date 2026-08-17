@@ -1,159 +1,334 @@
-// OBJETIVO: dar comportamento ao site do GTA VI com JavaScript.
+const navigation = document.getElementById("site-nav");
 
-// Passos:
-// 1. MENU QUE SOME AO ROLAR
-//    - achar o menu no HTML
-//    - escutar o evento de rolagem da janela
-//    - se a página desceu mais de 50px, adicionar a classe "menu-rolado"
-//    - se voltou pro topo, remover a classe
+const revealElements = document.querySelectorAll(".reveal");
 
-// 2. BLOCOS QUE APARECEM
-//    - achar todos os elementos com a classe "aparecer"
-//    - avisar quando cada um entrar na tela
-//    - ao entrar, adicionar a classe "visivel"
+const heroVideo = document.querySelector(".hero__video");
+const hero = document.querySelector(".hero");
+const heroPanel = document.querySelector(".hero__panel");
+const heroContent = document.querySelector(".hero__content");
+const heroInfo = document.querySelector(".hero__info");
+const heroArrow = document.querySelector(".hero__arrow");
 
-// 3. VÍDEO QUE ANDA COM O SCROLL
-//    - achar o vídeo da capa
-//    - prender a capa na tela enquanto a pessoa rola
-//    - sumir com o conteúdo da capa e revelar o vídeo
-//    - avançar o tempo do vídeo conforme o scroll
-//    - o vídeo NUNCA toca sozinho: quem manda no tempo é a rolagem
-//    - quando o vídeo chega no fim, o pin acaba junto e a página é liberada
 
-const menu = document.getElementById("menu");
-const blocos = document.querySelectorAll(".aparecer");
-const video = document.querySelector(".capa-video");
-const capa = document.querySelector(".capa");
-const capaPainel = document.querySelector(".capa-painel");
-const capaConteudo = document.querySelector(".capa-conteudo");
-const capaBarra = document.querySelector(".capa-barra");
-const capaSeta = document.querySelector(".capa-seta");
+/* =====================================
+   NAVIGATION
+===================================== */
 
-if (menu) {
+if (navigation) {
     window.addEventListener("scroll", function () {
+
         if (window.scrollY > 50) {
-            menu.classList.add("menu-rolado");
+            navigation.classList.add("site-nav--hidden");
         } else {
-            menu.classList.remove("menu-rolado");
+            navigation.classList.remove("site-nav--hidden");
         }
+
     });
 }
 
-if (blocos.length) {
-    const observador = new IntersectionObserver(function (entradas) {
-        entradas.forEach(function (entrada) {
-            if (entrada.isIntersecting) {
-                entrada.target.classList.add("visivel");
+
+/* =====================================
+   REVEAL ELEMENTS
+===================================== */
+
+if (revealElements.length) {
+
+    const observer = new IntersectionObserver(function (entries) {
+
+        entries.forEach(function (entry) {
+
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
             }
+
         });
+
     });
 
-    blocos.forEach(function (bloco) {
-        observador.observe(bloco);
+    revealElements.forEach(function (element) {
+        observer.observe(element);
     });
+
 }
 
-if (window.gsap && window.ScrollTrigger && video && capa && capaPainel && capaConteudo) {
+
+/* =====================================
+   VIDEO CONTROLLED BY SCROLL
+===================================== */
+
+if (
+    window.gsap &&
+    window.ScrollTrigger &&
+    heroVideo &&
+    hero &&
+    heroPanel &&
+    heroContent
+) {
+
     gsap.registerPlugin(ScrollTrigger);
 
-    const DISTANCIA_PIN = 2500;
-    // margem pra parar no último frame sem disparar o "ended" (que rebobina em alguns navegadores)
-    const MARGEM_FINAL = 0.05;
 
-    video.muted = true;
-    video.playsInline = true;
-    video.setAttribute("playsinline", "true");
-    video.removeAttribute("autoplay");
-    video.removeAttribute("loop");
-    video.loop = false;
-    video.pause();
+    const SCROLL_DISTANCE = 3500;
 
-    let duracao = 0;
-    let liberado = false;
+    const END_MARGIN = 0.05;
 
-    // trava de segurança: se algo mandar o vídeo tocar, ele volta a ficar parado
-    video.addEventListener("play", function () {
-        if (!liberado) {
-            video.pause();
+    heroVideo.muted = true;
+
+    heroVideo.playsInline = true;
+
+    heroVideo.setAttribute(
+        "playsinline",
+        "true"
+    );
+
+    heroVideo.removeAttribute(
+        "autoplay"
+    );
+
+    heroVideo.removeAttribute(
+        "loop"
+    );
+
+    heroVideo.loop = false;
+
+    heroVideo.pause();
+
+
+    let videoDuration = 0;
+
+    let videoUnlocked = false;
+
+
+    heroVideo.addEventListener(
+        "play",
+        function () {
+
+            if (!videoUnlocked) {
+                heroVideo.pause();
+            }
+
         }
-    });
+    );
 
-    const guardarDuracao = function () {
-        if (video.duration && Number.isFinite(video.duration)) {
-            duracao = video.duration;
+
+
+    const saveVideoDuration = function () {
+
+        if (
+            heroVideo.duration &&
+            Number.isFinite(
+                heroVideo.duration
+            )
+        ) {
+
+            videoDuration =
+                heroVideo.duration;
+
             ScrollTrigger.refresh();
+
         }
+
     };
 
-    if (video.readyState >= 1) {
-        guardarDuracao();
+
+    if (heroVideo.readyState >= 1) {
+
+        saveVideoDuration();
+
     } else {
-        video.addEventListener("loadedmetadata", guardarDuracao, { once: true });
+
+        heroVideo.addEventListener(
+            "loadedmetadata",
+            saveVideoDuration,
+            {
+                once: true
+            }
+        );
+
     }
 
-    // alguns navegadores só liberam o seek depois de um play; damos play e pausamos na hora
-    const prepararVideo = function () {
-        liberado = true;
 
-        const playPromise = video.play();
+    const unlockVideo = function () {
 
-        const parar = function () {
-            liberado = false;
-            video.pause();
-            // volta pro frame que o scroll está pedindo agora
-            aplicarTempo();
+        videoUnlocked = true;
+
+        const playPromise =
+            heroVideo.play();
+
+
+        const stopVideo = function () {
+
+            videoUnlocked = false;
+
+            heroVideo.pause();
+
+            updateVideoTime();
+
         };
 
-        if (playPromise && typeof playPromise.then === "function") {
-            playPromise.then(parar).catch(function () {
-                liberado = false;
-            });
+
+        if (
+            playPromise &&
+            typeof playPromise.then ===
+            "function"
+        ) {
+
+            playPromise
+                .then(stopVideo)
+                .catch(function () {
+
+                    videoUnlocked = false;
+
+                });
+
         } else {
-            parar();
+
+            stopVideo();
+
         }
+
     };
 
-    window.addEventListener("pointerdown", prepararVideo, { once: true });
-    window.addEventListener("touchstart", prepararVideo, { once: true });
 
-    // objeto intermediário: o GSAP anima esse tempo com o scrub e a gente repassa pro vídeo
-    const estado = { tempo: 0 };
+    window.addEventListener(
+        "pointerdown",
+        unlockVideo,
+        {
+            once: true
+        }
+    );
 
-    const aplicarTempo = function () {
-        if (!duracao || video.readyState < 1) {
+    window.addEventListener(
+        "touchstart",
+        unlockVideo,
+        {
+            once: true
+        }
+    );
+
+
+    const videoState = {
+        time: 0
+    };
+
+
+    const updateVideoTime = function () {
+
+        if (
+            !videoDuration ||
+            heroVideo.readyState < 1
+        ) {
+
             return;
+
         }
 
-        if (Math.abs(video.currentTime - estado.tempo) > 0.01) {
-            video.currentTime = estado.tempo;
+
+        if (
+            Math.abs(
+                heroVideo.currentTime -
+                videoState.time
+            ) > 0.01
+        ) {
+
+            heroVideo.currentTime =
+                videoState.time;
+
         }
+
     };
+
+
+    /*
+        ANIMAÇÃO PRINCIPAL
+    */
 
     gsap.timeline({
+
         scrollTrigger: {
-            trigger: capa,
+
+            trigger: hero,
+
             start: "top top",
-            end: "+=" + DISTANCIA_PIN,
+
+            end:
+                "+=" +
+                SCROLL_DISTANCE,
+
             scrub: 1,
+
             pin: true,
-            invalidateOnRefresh: true,
+
+            invalidateOnRefresh: true
+
         }
+
     })
-        .to(video, { opacity: 1, duration: 0.15, ease: "none" }, 0)
-        .to(".capa-conteudo, .capa-barra, .capa-seta", {
-            opacity: 0,
-            y: -40,
-            scale: 0.6,
-            duration: 0.1,
-            ease: "none",
-        }, 0.02)
-        // duração 1 = o vídeo ocupa o pin inteiro e termina exatamente quando o scroll é liberado
-        .fromTo(estado, { tempo: 0 }, {
-            tempo: function () {
-                return Math.max(duracao - MARGEM_FINAL, 0);
+
+
+        .to(
+            heroVideo,
+            {
+                opacity: 1,
+                duration: 0.15,
+                ease: "none"
             },
-            duration: 1,
-            ease: "none",
-            onUpdate: aplicarTempo,
-        }, 0);
+            0
+        )
+
+
+        .to(
+            [
+                heroContent,
+                heroInfo,
+                heroArrow
+            ],
+            {
+                opacity: 0,
+
+                y: -40,
+
+                scale: 0.6,
+
+                duration: 0.1,
+
+                ease: "none"
+            },
+            0.02
+        )
+
+
+
+        .fromTo(
+
+            videoState,
+
+            {
+                time: 0
+            },
+
+            {
+
+                time: function () {
+
+                    return Math.max(
+                        videoDuration -
+                        END_MARGIN,
+                        0
+                    );
+
+                },
+
+                duration: 1,
+
+                ease: "none",
+
+                onUpdate:
+                    updateVideoTime
+
+            },
+
+            0
+        );
+
 }
